@@ -1,0 +1,25 @@
+{% extends "index.html" %}
+
+{% block title %}
+Запитання
+{% endblock %}
+
+
+{% block value1 %}
+    {% if current_user.name == admin %}
+        kirill
+    {% else %}
+        {{current_user.name}} score: {{current_user.score}}
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    <div class="full-center cube-form3">
+        <div style="background-color: #321065; border-radius: 10%; box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);">
+            <h1>{{question}}</h1>
+        </div>
+        <div style="color: #3C6E71; position: absolute; top: 80vh; height: 5vh; left: 2vw; width: 2.2vw;" id="progress"></div>
+    </div>
+    <audio id="audio" src="{{ url_for('static', filename='sound/qstart.mp3')}}" autoplay></audio>
+    <script src="{{url_for('static', filename='js/question.js')}}"></script>
+{% endblock %}

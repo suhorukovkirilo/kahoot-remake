@@ -1,0 +1,40 @@
+{% extends "index.html" %}
+
+{% block title %}
+Очікування на тест
+{% endblock %}
+{% block value1 %}
+    {% if current_user.name == admin %}
+        kirill
+    {% else %}
+        {{current_user.name}} score: {{current_user.score}}
+    {% endif %}
+{% endblock %}
+{% block body %}
+    {% if current_user.name == admin %}
+        <br><div id="users-card" class="card cube-form2 center" style="text-align: left" xmlns="http://www.w3.org/1999/html">
+        <div class="card-header" style="color: #321065;"><strong>Квіз по SQL початок</strong></div>
+        <div class="card-body">
+            <h5 class="card-title center" style="color: black">Учасники</h5>
+            <p id="users" class="card-text one-line">
+                {% for user in logged_users %}
+                    {% if user != admin %}
+                        <a href="/del/{{user}}" class="btn btn-primary" style="background-color: #381272; border-color: #381272; margin-left: 2px; margin-right: 2px;">{{user}}</a>
+                    {% endif %}
+                {% endfor %}
+            </p>
+            <br><br>  <a href="/next_question" class="btn btn-primary center">Почати тестування</a>
+            <br><br>  <a href="/add/FullAnswerQuestion" class="btn btn-primary center">Повне запитання</a>  <a href="/add/OptionsQuestion" class="btn btn-primary center">Запитання з відповідями</a>  <a href="/add/CheckQuestion" class="btn btn-primary center">Запитання з перевіркою</a>
+            <br><br>  <a href="/clear" class="btn btn-primary center">Очистити</a>  <a href="/reload" class="btn btn-primary center">Перезавантажити</a>
+            <br><br>  <a href="/logout" class="btn btn-primary center">Вийти</a>
+        </div></div>
+        <audio id="audio" src="{{ url_for('static', filename='sound/lobby.mp3')}}" loop></audio>
+        <a id="play" onclick="play()" class="btn btn-primary">Грати музику</a>
+    {% else %}
+        <div class="full-center cube-form3">
+            <h1>Очікуємо організатора на початок тесту</h1>
+            <a href="/logout" class="btn btn-primary">Вийти</a>
+        </div>
+    {% endif %}
+    <script src="{{url_for('static', filename='js/waiting.js')}}"></script>
+{% endblock %}

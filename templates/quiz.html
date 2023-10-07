@@ -1,0 +1,67 @@
+{% extends "index.html" %}
+
+{% block title %}
+Тестування
+{% endblock %}
+
+{% block value1 %}
+    {% if current_user.name == admin %}
+        kirill
+    {% else %}
+        {{current_user.name}} score: {{current_user.score}}
+    {% endif %}
+{% endblock %}
+
+
+{% block body %}
+    <div class="card full-center" style="background: none; border: none;" xmlns="http://www.w3.org/1999/html">
+        <div style="float: right; color: white; font-size: 36px;"><span>{{qq}}</span></div>
+        <div id="clock" class="center" style="font-size: 48px; border-radius: 50%; background-color: white; align-items: center; justify-content: center; width: 100px; height: 100px; color: #333333"><span id="time_left">{{time_sec}}</span></div>
+        {% if current_user.name not in answered %}
+        <div style="background-color: rgba(0, 0, 0, 0.1); width: 50vw; border-radius: 3%;" class="center">
+            <div class="card-header"><h1><strong>{{current_question.question}}</strong></h1></div>
+            <div class="card-body">
+                {% if type in ["FullAnswerQuestion", "CheckQuestion"] %}
+                <form method="post" action="/answer">
+                <div class="form-floating center cube-form">
+                    {% if type == "FullAnswerQuestion"%}
+                        <input id="input" name="answer" class="form-control" placeholder="Відповідь" autofocus value="{{what_input}}">
+                    {% else %}
+                        <textarea id="textarea" name="check-answer" class="form-control" placeholder="Відповідь" autofocus>{{what_input}}</textarea>
+                    {% endif %}
+                    <label ><font style="vertical-align: inherit; color: gray;">Відповідь</font></label>
+                </div>
+                {% if current_user.name != admin %}
+                <button class="btn btn-lg center cube-form"  style="background-color: #333333" type="submit"><font style="vertical-align: inherit; color: white">Надіслати</font></button>
+                {% endif %}
+            </form>
+            {% else %}
+                    {% if current_question.answer1 != "" %}
+                        <a href="/answer/{{current_question.answer1}}" class="btn btn-primary" style="float: left; padding: 10px; font-size: 200%; background-color: red; border-color: red; width: 22vw;">{{current_question.answer1}}</a>
+                    {% endif %}
+                    {% if current_question.answer2 != "" %}
+                        <a href="/answer/{{current_question.answer2}}" class="btn btn-primary" style="float: right; padding: 10px; font-size: 200%; width: 22vw;">{{current_question.answer2}}</a>
+                    {% endif %}
+                    <br><br><br><br>{% if current_question.answer3 != "" %}
+                        <a href="/answer/{{current_question.answer3}}" class="btn btn-primary" style="float: left; padding: 10px; font-size: 200%; width: 22vw; background-color: yellow; border-color: yellow;">{{current_question.answer3}}</a>
+                    {% endif %}
+                    {% if current_question.answer4 != "" %}
+                        <a href="/answer/{{current_question.answer4}}" class="btn btn-primary" style="font-size: 200%; float: right; padding: 10px; font-size: 200%; width: 22vw; background-color: green; border-color: green;">{{current_question.answer4}}</a>
+                    {% endif %}
+                    <br><br><br><br>{% if current_question.answer5 != "" %}
+                        <a href="/answer/{{current_question.answer5}}" class="btn btn-primary" style="float: left; padding: 10px; font-size: 200%; width: 22vw; background-color: orange; border-color: orange;">{{current_question.answer5}}</a>
+                    {% endif %}
+                    {% if current_question.answer6 != "" %}
+                        <a href="/answer/{{current_question.answer6}}" class="btn btn-primary" style="float: right; padding: 10px; font-size: 200%; width: 22vw; background-color: black; border-color: black;">{{current_question.answer6}}</a>
+                    <br><br><a style="visibility: hidden;">@kahoot.kirill</a>
+                    {% endif %}
+            {% endif %}
+         </div>
+         </div>
+        {% else %}
+            <h1 class="full-center cube-from2">Чекаємо на закінчення таймера</h1>
+        {% endif %}
+        <audio src="{{ url_for('static', filename='sound/playing.mp3')}}" loop autoplay></audio>
+    </div>
+    <script src="{{url_for('static', filename='js/quiz.js')}}"></script>
+{% endblock %}

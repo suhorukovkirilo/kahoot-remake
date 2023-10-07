@@ -1,0 +1,50 @@
+{% extends "index.html" %}
+
+{% block title %}
+Додавання запитання з повною відповіддю
+{% endblock %}
+
+{% block body %}
+    <form class="container center" method="post">
+    <h1 class="h3 mb-3 fw-normal"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Запитання з повною віповіддю</font></font></h1>
+    <div class="form-floating center cube-form">
+      <input name="question" class="form-control" placeholder="Question">
+      <label><font style="vertical-align: inherit; color: gray;">Запитання</font></label>
+    </div>
+    <div class="form-floating center cube-form">
+      <input name="answer1" class="form-control" placeholder="answer1">
+      <label ><font style="vertical-align: inherit ; color: gray;">1 варіант</font></label>
+    </div>
+    <div class="form-floating center cube-form">
+      <input name="answer2" class="form-control" placeholder="answer2">
+      <label ><font style="vertical-align: inherit; color: gray;">2 варіант</font></label>
+    </div>
+
+    <div class="form-floating center cube-form">
+      <input name="answer3" class="form-control" placeholder="answer3">
+      <label ><font style="vertical-align: inherit; color: gray;">3 варіант</font></label>
+    </div>
+    <div class="form-floating center cube-form">
+      <input name="answer4" class="form-control" placeholder="answer4">
+      <label ><font style="vertical-align: inherit; color: gray;">4 варіант</font></label>
+    </div>
+    <div class="form-floating center cube-form">
+      <input name="answer5" class="form-control" placeholder="answer5">
+      <label ><font style="vertical-align: inherit; color: gray;">5 варіант</font></label>
+    </div>
+    <div class="form-floating center cube-form">
+      <input name="answer6" class="form-control" placeholder="answer6">
+      <label ><font style="vertical-align: inherit; color: gray;">6 варіант</font></label>
+    </div>
+    <div class="form-floating center cube-form">
+      <input name="correct" class="form-control" placeholder="correct">
+      <label ><font style="vertical-align: inherit; color: gray;">Правильна відповідь</font></label>
+    </div>
+    <div class="form-floating center cube-form">
+      <input name="time" class="form-control" placeholder="Time">
+      <label><font style="vertical-align: inherit; color: gray;">Час</font></label>
+    </div>
+        <button class="btn btn-lg center cube-form" style="background-color: #333333;" type="submit"><font style="vertical-align: inherit; color: white">Створити</font></button>
+    <p class="mt-5 mb-3 text-body-secondary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">© 2023</font></font></p>
+  </form>
+{% endblock %}

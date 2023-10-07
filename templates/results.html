@@ -1,0 +1,73 @@
+{% extends "index.html" %}
+
+{% block title %}
+Очікування на тест
+{% endblock %}
+{% block value1 %}
+    {% if current_user.name == admin %}
+        kirill
+    {% else %}
+        {{current_user.name}} score: {{current_user.score}}
+    {% endif %}
+{% endblock %}
+{% block body %}
+  <br><div class="row row-cols-md-3 mb-3 text-center" style="margin-left: 15%; margin-right: 15%">
+      <div class="col">
+        <div class="card mb-4 rounded-3 shadow-sm" style="background-color: #C0C0C0; animation: flyin 6s ease-in-out forwards; animation-delay: 2s; opacity: 0; top: 10%">
+          <div class="card-header py-3">
+            <h4 class="my-0 fw-normal">2 місце</h4>
+          </div>
+          <div class="card-body">
+            <h1 class="card-title pricing-card-title" style="animation: show 1s ease-in-out forwards; animation-delay: 7.5s; opacity: 0;">{{users[1].name}}</h1>
+            <ul class="list-unstyled mt-3 mb-4">
+              <li>score: {{users[1].score}}</li>
+              <li>correct questions: {{users[1].correct_questions}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card mb-4 rounded-3 shadow-sm" style="background-color: #FFD700; animation: flyin 7s ease-in-out forwards; animation-delay: 6.25s; opacity: 0;">
+          <div class="card-header py-3">
+            <h4 class="my-0 fw-normal">1 місце</h4>
+          </div>
+          <div class="card-body">
+            <h1 class="card-title pricing-card-title" style="animation: show 1s ease-in-out forwards; animation-delay: 13.5s; opacity: 0;">{{users[0].name}}</h1>
+            <ul class="list-unstyled mt-3 mb-4">
+              <li>score: {{users[0].score}}</li>
+              <li>correct questions: {{users[0].correct_questions}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="col">
+        <div class="card mb-4 rounded-3 shadow-sm" style="background-color: #CD7F32; animation: flyin 5.1s ease-in-out forwards; opacity: 0; top: 20%">
+          <div class="card-header py-3">
+            <h4 class="my-0 fw-normal">3 місце</h4>
+          </div>
+          <div class="card-body">
+            <h1 class="card-title pricing-card-title" style="animation: show 1s ease-in-out forwards; animation-delay: 4.5s; opacity: 0;">{{users[2].name}}</h1>
+            <ul class="list-unstyled mt-3 mb-4">
+              <li>score: {{users[2].score}}</li>
+              <li>correct questions: {{users[2].correct_questions}}</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br><div class="card cube-form2 center" style="text-align: left; animation: flyin 3.5s ease-in-out forwards; animation-delay: 14.5s; opacity: 0; top: 30%;" xmlns="http://www.w3.org/1999/html">
+        <div class="card-header" style="color: #321065;"><strong>Топ</strong></div>
+        <div class="card-body">
+            <h5 class="card-title center" style="color: black">Учасники</h5>
+            <p class="card-text one-line">
+                {% for num in range %}
+                    {% if num > 2 %}
+                        <br><br><a class="btn btn-primary">{{num+1}}</a> <a href="/del/{{users[num].name}}" class="btn btn-primary">{{users[num].name}}</a>
+                        <a class="btn btn-primary">{{users[num].score}}</a>
+                    {% endif %}
+                {% endfor %}
+                <br><br><a href="/next_question" class="btn btn-primary center">Наступне запитання</a>
+            </p>
+        </div></div>
+    <audio src="{{ url_for('static', filename='sound/podium.mp3')}}" autoplay></audio>
+{% endblock %}}

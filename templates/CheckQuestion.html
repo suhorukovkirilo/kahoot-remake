@@ -1,0 +1,21 @@
+{% extends "index.html" %}
+
+{% block title %}
+Додавання запитання з повною відповіддю
+{% endblock %}
+
+{% block body %}
+    <form class="container center" method="post">
+    <h1 class="h3 mb-3 fw-normal"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Запитання з повною віповіддю</font></font></h1>
+    <div class="form-floating center cube-form">
+      <input name="question" class="form-control" placeholder="Question">
+      <label><font style="vertical-align: inherit; color: gray;">Запитання</font></label>
+    </div>
+    <div class="form-floating center cube-form">
+      <input name="time" class="form-control" placeholder="Time">
+      <label><font style="vertical-align: inherit; color: gray;">Час</font></label>
+    </div>
+        <button class="btn btn-lg btn-primary btn-success center cube-form" type="submit"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">Створити</font></font></button>
+    <p class="mt-5 mb-3 text-body-secondary"><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">© 2023</font></font></p>
+  </form>
+{% endblock %}

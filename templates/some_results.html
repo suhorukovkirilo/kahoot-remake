@@ -1,0 +1,113 @@
+{% extends "index.html" %}
+
+
+{% block title %}
+Тестування
+{% endblock %}
+
+{% block value1 %}
+    {% if current_user.name == admin %}
+        kirill
+    {% else %}
+        {{current_user.name}} score: {{current_user.score}}
+    {% endif %}
+{% endblock %}
+
+{% block body %}
+    {% if current_user.name == admin %}
+        <br><div class="card cube-form2 center" style="text-align: left" xmlns="http://www.w3.org/1999/html">
+        <div class="card-header" style="color: #321065;"><strong>{{question.question}}</strong></div>
+        <div class="card-body">
+            <p class="card-text" style="padding: 15px;">
+                {% if type == "FullAnswerQuestion" %}
+                    {% for answer in question.correct_answers.split("//") %}
+                        <a class="btn btn-primary center">{{answer}}</a>
+                    {% endfor %}
+                {% else %}
+                    {% if type == "OptionsQuestion"%}
+                    <a class="btn btn-primary center">{{question.correct}}</a>
+                    {% else %}
+                        {% if type == "CheckQuestion" %}
+                            {% for user in answered %}
+                                {% if user not in checked.keys() %}
+                                    <div class="card cube-form2 center" style="text-align: left" xmlns="http://www.w3.org/1999/html">
+                                        <div class="card-header" style="color: #321065;"><strong>{{user}}</strong></div>
+                                        <div class="card-body">
+                                            <p class="card-text" style="color: black;">{{what_answered[user]}}</p>
+                                            <a class="btn btn-primary" href="/check/1/{{user}}">✅</a><a class="btn btn-warning" href="/check/0/{{user}}">❌</a>
+                                        </div>
+                                    </div>
+                                {% endif %}
+                            {% endfor %}
+                        {% else %}
+                            {% for btn in question.correct.split("//") %}
+                                <br><a class="btn btn-primary">{{btn}}</a>
+                            {% endfor %}
+                        {% endif %}
+                    {% endif %}
+                {% endif %}
+            </p>
+            {% if not last_question %}
+                <br><a href="/statistic" class="btn btn-primary card-text">Статистика</a>
+            {% else %}
+                <br><a href="/results" class="btn btn-primary card-text">Результати</a>
+            {% endif %}
+        </div>
+</div>
+    {% else %}
+        <div class="full-center cube-form2">
+            <div style="background-color: #321065; border-radius: 10%; box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);">
+                {% if type == "FullAnswerQuestion" %}
+                    {% if current_user.name not in answered %}
+                        <h1>❌</h1>
+                    {% else %}
+                        {% if what_answered[current_user.name] not in question.correct_answers.split("//") %}
+                            <h1>❌</h1>
+                        {% else %}
+                            <h1>✅ {{what_answered[current_user.name]}}</h1>
+                        {% endif %}
+                    {% endif %}
+                {% else %}
+                    {% if type == "OptionsQuestion"%}
+                        {% if current_user.name not in answered %}
+                            <h1>❌</h1>
+                        {% else %}
+                            {% if what_answered[current_user.name] != question.correct %}
+                                <h1>❌ {{what_answered[current_user.name]}}</h1>
+                                <h1>✅ {{question.correct}}</h1>
+                            {% else %}
+                                <h1>✅ {{what_answered[current_user.name]}}</h1>
+                            {% endif %}
+                        {% endif %}
+                    {% else %}
+                        {% if type == "CheckQuestion" %}
+                            {% if current_user.name not in checked.keys() %}
+                                <h1>Йде перевірка вашої відповіді</h1>
+                            {% else %}
+                                {% if checked[current_user.name] %}
+                                    <h1>✅ {{what_answered[current_user.name]}}</h1>
+                                {% else %}
+                                    <h1>❌</h1>
+                                {% endif %}
+                            {% endif %}
+                        {% else %}
+                            {% if current_user.name not in answered %}
+                                <h1>❌</h1>
+                            {% else %}
+                                {% for num in range %}
+                                    {% if current_solution[current_user.name].split("//")[num] == question.correct.split("//")[num] %}
+                                        <h1>✅ {{current_solution[current_user.name].split("//")[num]}}</h1>
+                                    {% else %}
+                                        <h1>❌ {{current_solution[current_user.name].split("//")[num]}} ✅ {{question.correct.split("//")[num]}}</h1>
+                                    {% endif %}
+                                {% endfor%}
+                            {% endif %}
+                        {% endif %}
+                    {% endif %}
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
+    <audio id="audio" src="{{ url_for('static', filename='sound/qend.mp3')}}" autoplay></audio>
+    <script src="{{url_for('static', filename='js/some_results.js')}}"></script>
+{% endblock %}
