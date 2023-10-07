@@ -1,0 +1,116 @@
+.center {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.full-center {
+    padding: 5%;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+.cube-form {
+    width: 30%
+}
+
+.cube-form2 {
+    width: 45%
+}
+
+.cube-form3 {
+    width: 60%
+}
+
+.back-cube {
+    position: fixed;
+    background-color: rgb(0, 0, 0);
+    transform: rotate(45deg);
+    opacity: 0.1;
+    top: -15vmin;
+    left: -15vmin;
+    min-width: 75vmin;
+    min-height: 75vmin;
+}
+
+.back-circle {
+    position: fixed;
+    border-radius: 50%;
+    background-color: rgb(0, 0, 0);
+    opacity: 0.1;
+    min-width: 75vmin;
+    min-height: 75vmin;
+    bottom: -15vmin;
+    right: -15vmin;
+}
+
+.login-title {
+    position: absolute;
+    font-family: Montserrat;
+    font-size: max(4vw, 35px);
+    top: 37.5vh;
+    left: 43vw;
+}
+
+.login-form {
+    background-color: rgb(255, 255, 255);
+    padding: 16px;
+    border-radius: 4px;
+    box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 4px;
+    width: 25vw;
+    min-width: 232px;
+    position: absolute;
+    top: 50vh;
+    left: 37.5vw;
+}
+
+.login-input {
+    height: 48px;
+    line-height: 2.375rem;
+    text-align: center;
+    width: 100%;
+    color: rgb(51, 51, 51);
+    font-size: 1rem;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-bottom: 0.625rem;
+    border: 0.125rem solid rgb(204, 204, 204);
+    padding: 0.25rem 0.375rem;
+    font-weight: 700;
+    font-family: Montserrat, "Noto Sans Arabic", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.login-submit {
+    width: 100%;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px -4px inset;
+    background: rgb(51, 51, 51);
+    color: rgb(255, 255, 255);
+    border-radius: 4px;
+    font-weight: bold;
+    text-align: center;
+    height: 48px;
+    font-family: Montserrat, "Noto Sans Arabic", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+@keyframes flyin{
+  0% {
+    transform: translateY(300%);
+    opacity: 1;
+  }
+  90% {
+    transform: translateY(-20%);
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes show{
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
