@@ -233,4 +233,4 @@ def not_found(error):
 
 
 if __name__ == "__main__":
-    socket.run(app=app, debug=True, host="127.0.0.1")
+    socket.run(app=app, host="0.0.0.0")
